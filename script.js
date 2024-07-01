@@ -39,15 +39,17 @@ function actualizar(event) {
 }
 
 function iniciarJuego() {
-    if (snake[0].x > 15 * box && direction == "right") snake[0].x = 0;
-    if (snake[0].x < 0 && direction == 'left') snake[0].x = 16 * box;
-    if (snake[0].y > 15 * box && direction == "down") snake[0].y = 0;
-    if (snake[0].y < 0 && direction == 'up') snake[0].y = 16 * box;
+    // Verificar si la serpiente ha tocado el borde del canvas
+    if (snake[0].x >= 16 * box || snake[0].x < 0 || snake[0].y >= 16 * box || snake[0].y < 0) {
+        clearInterval(juego);
+        alert('GAME OVER');
+        return;
+    }
 
     for (i = 1; i < snake.length; i++) {
         if (snake[0].x == snake[i].x && snake[0].y == snake[i].y) {
             clearInterval(juego);
-            alert('Game Over :(');
+            alert('GAME OVER');
         }
     }
 
